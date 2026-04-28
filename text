@@ -1,0 +1,149 @@
+    <section class="sue-section nav-menu-section" id="resume">
+        <div class="sue-container sue-sub-container">
+            <div class="sue-wrapper">
+                <div class="section-title">
+                    <h3>My Resume</h3>
+                    <p>Combination Of Skills & Experience</p>
+                </div>
+                <div class="resume-tabs">
+                    <a class="tab-btn active"><i class="ri-graduation-cap-line"></i>Education</a>
+                    <a class="tab-btn "><i class="ri-sparkling-line"></i></i>Experience</a>
+                    <a class="tab-btn "><i class="ri-user-settings-line"></i>Parsonal Skills</a>
+                </div>
+                <div class="section-content">
+                    <div class="resume-tab-content education active">
+                        <div class="resume-line"></div>
+                        <div class="resume-items">
+                            <!-- ======== -->
+                            <div class="item item-left">
+                                <div class="info">
+                                    <i class="ri-graduation-cap-fill"></i>
+                                    <div>
+                                        <h5>Front-End Developer
+                                        </h5>
+                                        <p>Creative It Institute
+                                        </p>
+                                        <span>2025-2026</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ====== -->
+                            <div class="item item-right">
+                                <div class="info">
+                                    <i class="ri-graduation-cap-fill"></i>
+                                    <div>
+                                        <h5>Diploma In CSE</h5>
+                                        <p>Mirpur Polytechnic Institute
+                                        </p>
+                                        <span>2021-2024</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- =========================== -->
+                            <div class="item item-left">
+                                <div class="info">
+                                    <i class="ri-graduation-cap-fill"></i>
+                                    <div>
+                                        <h5>Graphic Designer</h5>
+                                        <p>Great Learning
+                                        </p>
+                                        <span>2018-2019</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ==== -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- css -->
+
+
+    .resume-tabs{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    column-gap: 30px;
+    row-gap: 30px;
+    margin-bottom: 100px;
+}
+.resume-tabs .tab-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 5px;
+    color: var(--color-01);
+    font-size: var(--medium-font-size);
+    font-weight: var(--font-medium);
+    padding: 12px 0;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: .3s;
+}
+.resume-tabs .tab-btn:hover{
+    color: var(--hover-color);
+}
+.resume-tabs .tab-btn i{
+    font-size: var(--xlarge-font-size);
+    margin-right: 3px;
+}
+.resume-tabs .tab-btn.active{
+    color: var(--dark-color);
+    background:var(--pimary-color);
+    padding: 12px 15px;
+}
+.resume-tabs .tab-btn.active:hover{
+    color: var(--white-color);
+    background:var(--hover-color);
+}
+.resume-tab-content{
+    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+.education .resume-line{
+background: var(--pimary-color);
+width: 2px;
+height: 380px;
+}
+.resume-items{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 125px;
+}
+.resume-items .item{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.resume-items .item::before{
+    content: "";
+    position: absolute;
+    background: var(--pimary-color);
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+.resume-items.item .info{
+position: absolute;
+width: 250px;
+display: flex;
+align-items: center;
+column-gap: 25px;
+}
+.resume-items .item-left .info{
+right: 35px;
+}
+.resume-items.item-right.info{
+    left: 50px;
+}
