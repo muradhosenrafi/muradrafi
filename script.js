@@ -195,61 +195,158 @@ portfolioCardswithModals.forEach((portfolioCardswithModal) => {
 //     });
 // });
 
-(function () {
-    emailjs.init({
-        publicKey: "rieG3P6f9QESbyGUo",
-    });
-})();
+// (function () {
+//     emailjs.init({
+//         publicKey: "rieG3P6f9QESbyGUo",
+//     });
+// })();
 
-const contactForm = document.getElementById("sue-contact-form");
-const alertBox = document.querySelector(".contact-form-alert");
+// const contactForm = document.getElementById("sue-contact-form");
+// const alertBox = document.querySelector(".contact-form-alert");
 
-contactForm.addEventListener("submit", function (e) {
-    e.preventDefault();
+// contactForm.addEventListener("submit", function (e) {
+//     e.preventDefault();
 
-    alertBox.innerHTML = `<span>Sending...</span>`;
+//     alertBox.innerHTML = `<span>Sending...</span>`;
 
-    emailjs.sendForm("service_2szd9w8", "template_wi7zhdi", "contactForm")
-        .then(() => {
-            alertBox.innerHTML = `
-                <span>Message sent successfully!</span>
-                <i class='ri-checkbox-circle-fill'></i>
-            `;
-            contactForm.reset();
-        })
-        .catch((error) => {
-            alertBox.innerHTML = `
-                <span>Message not sent!</span>
-                <i class='ri-error-warning-fill'></i>
-            `;
-            console.error(error);
-        });
-});
+//     emailjs.sendForm("service_2szd9w8", "template_wi7zhdi", "contactForm")
+//         .then(() => {
+//             alertBox.innerHTML = `
+//                 <span>Message sent successfully!</span>
+//                 <i class='ri-checkbox-circle-fill'></i>
+//             `;
+//             contactForm.reset();
+//         })
+//         .catch((error) => {
+//             alertBox.innerHTML = `
+//                 <span>Message not sent!</span>
+//                 <i class='ri-error-warning-fill'></i>
+//             `;
+//             console.error(error);
+//         });
+// });
 /* =====================================================
    Shrink the height of the header on scroll
 ===================================================== */
+window.addEventListener("scroll", () => {
+   const sueHeader = document.querySelector(".sue-header");
 
+   sueHeader.classList.toggle("shrink", window.scrollY > 0)
+});
 /* =====================================================
    Bottom navigation menu
 ===================================================== */
 
-// Each bottom navigation menu items active on page scroll.
+window.addEventListener("scroll", () => {
+  const navMenuSections = document.querySelectorAll(".nav-menu-section");
+  const scrollY = window.pageYOffset;
+
+  navMenuSections.forEach((section) => {
+    const sectionHeight = section.offsetHeight;
+    const sectionTop = section.offsetTop - 50;
+    const id = section.getAttribute("id");
+
+    const navLink = document.querySelector(
+      `.bottom-nav .menu li a[href*="${id}"]`
+    );
+
+    if (navLink) {
+      if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+        navLink.classList.add("current");
+      } else {
+        navLink.classList.remove("current");
+      }
+    }
+  });
+});
 
 // Javascript to show bottom navigation menu on home(page load).
-
+window.addEventListener("DOMContentLoaded", () => {
+   const bottomNav = document.querySelector(".bottom-nav");
+   bottomNav.classList.toggle("active", window.scrollY < 10);
+});
 // Javascript to show/hide bottom navigation menu on home(scroll).
+const bottomNav = document.querySelector(".bottom-nav");
+const menuHideBtn = document.querySelector(".menu-hide-btn");
+const menuShowBtn = document.querySelector(".menu-show-btn");
+
+var navTimeout;
+
+window.addEventListener("scroll", () => {
+   bottomNav.classList.add("active");
+   menuShowBtn.classList.remove("active");
+
+
+   if (window.scrollY < 10) {
+
+//  menuHideBtn.classList.remove("active"); not working!!!!!!!!!
+
+      function scrollStopped() {
+         bottomNav.classList.add("active");
+      }
+      clearTimeout(navTimeout);
+navTimeout=setTimeout(scrollStopped, 2500);
+
+   }
+
+
+   if (window.scrollY > 10) {
+      menuHideBtn.classList.add("active");
+
+      function scrollStopped() {
+         bottomNav.classList.remove("active");
+         menuShowBtn.classList.add("active");
+      }
+      clearTimeout(navTimeout);
+navTimeout=setTimeout(scrollStopped, 2500);
+   }
+});
 
 // Hide bottom navigation menu on click menu-hide-btn.
+menuHideBtn.addEventListener("click", () => {
+  bottomNav.classList.remove("active");   // nav hide
+  menuHideBtn.classList.remove("active"); // hide button hide
+  menuShowBtn.classList.add("active");    // show button show
+});
 
 // Show bottom navigation menu on click menu-show-btn.
+
+menuShowBtn.addEventListener("click", () => {
+  bottomNav.classList.add("active");      // nav show
+  menuShowBtn.classList.remove("active"); // show button hide
+  menuHideBtn.classList.add("active");    // hide button show
+});
 
 /* =====================================================
    To-top-button with scroll indicator bar
 ===================================================== */
-
+window.addEventListener("scroll",()=>{
+   const toptobtn = document .querySelector(".to-tap-btn");
+   toptobtn.classList.toggle("active",window.scrollY > 0);
+   // scroll indicator bar
+   const scrollindicatorbar =document.querySelector(".scroll-indicator-bar");
+   const pageScroll = document.body.scrollTop || document.documentElement.scrollTop;
+   const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+   const scrollValue = (pageScroll / height) * 100;
+   scrollindicatorbar.style.height = scrollValue + "%";
+})
 /* =====================================================
    Customized cursor on mousemove
 ===================================================== */
+const cursor =document.querySelector(".cursor");
+const cursordot=cursor.querySelector(".cursor-dot");
+const cursorCricle=cursor.querySelector(".cursor-circle");
+
+document.addEventListener("mousemove",(e)=>{
+   let x = e.clientX;
+   let y = e.clientX;
+
+   cursordot.style.top= y + "px";
+   cursordot.style.left= x + "px";
+   cursorCricle.style.top= y + "px";
+   cursorCricle.style.left= x + "px";
+})
+
 
 // Cursor effects on hover website elements.
 
