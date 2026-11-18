@@ -1358,3 +1358,29 @@ align-items: center;
 @media screen and (max-width: 480px){
     
 }
+
+
+/* Light theme overrides */
+body.light-theme {
+    --color-01: hsl(var(--hue) 26% 18%);
+    --color-02: hsl(var(--hue) 26% 12%);
+    --color-03: hsl(var(--hue) 45% 99%);
+    --color-04: hsl(var(--hue) 12% 42%);
+    --color-05: hsl(var(--hue) var(--sat) 90%);
+    --body-color: hsl(var(--hue) 35% 97%);
+    --buttom-nav-bg: hsl(var(--hue) 30% 94% / .92);
+    --card-bg: linear-gradient(120deg, hsl(var(--hue) 35% 88% / .8), hsl(var(--hue) 35% 94% / .7));
+    --modal-backdrop-bg: hsl(var(--hue) 20% 15% / .35);
+    --footer-bg: linear-gradient(360deg, hsl(var(--hue) 35% 88%), hsl(var(--hue) 35% 94%));
+    --scrollbar-color: hsl(var(--hue) 15% 85%);
+    --scrollbar-thumb: hsl(var(--hue) var(--sat) 48%);
+    --scrollbar-thumb-hover: hsl(var(--hue) var(--sat) 40%);
+}
+
+body.light-theme .theme-btn .sun-icon {
+    display: none;
+}
+
+body.light-theme .theme-btn .moon-icon {
+    display: block;
+}
