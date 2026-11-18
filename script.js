@@ -261,6 +261,41 @@ if (contactForm && alertBox && window.emailjs) {
 
 // Get saved theme icon and theme on document loaded.
 
+// Dark/light theme toggle with saved preference.
+const themeButton = document.querySelector(".theme-btn");
+const themeStorageKey = "rafi-portfolio-theme";
+
+function applyTheme(theme) {
+    const isLight = theme === "light";
+    document.body.classList.toggle("light-theme", isLight);
+
+    const sunIcon = themeButton?.querySelector(".sun-icon");
+    const moonIcon = themeButton?.querySelector(".moon-icon");
+
+    if (sunIcon && moonIcon) {
+        sunIcon.style.display = isLight ? "none" : "block";
+        moonIcon.style.display = isLight ? "block" : "none";
+    }
+}
+
+let savedTheme = "dark";
+try {
+    savedTheme = localStorage.getItem(themeStorageKey) || "dark";
+} catch (error) {
+    console.warn("Theme preference could not be read:", error);
+}
+applyTheme(savedTheme);
+
+themeButton?.addEventListener("click", () => {
+    const nextTheme = document.body.classList.contains("light-theme") ? "dark" : "light";
+    applyTheme(nextTheme);
+    try {
+        localStorage.setItem(themeStorageKey, nextTheme);
+    } catch (error) {
+        console.warn("Theme preference could not be saved:", error);
+    }
+});
+
 /* =====================================================
    ScrollReveal JS animations
 ===================================================== */
