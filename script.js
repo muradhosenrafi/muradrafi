@@ -15,13 +15,14 @@ var resumeTabNav = function (resumeTabClick) {
       resumePortfolioTabBtn.classList.remove("active");
    });
 
-   resumeTabContents[resumeTabClick].style.display = "flex";
+   const selectedContent = resumeTabContents[resumeTabClick];
+   const selectedButton = resumePortfolioTabBtns[resumeTabClick];
 
-   setInterval(() => {
-      resumeTabContents[resumeTabClick].classList.add("active");
-   }, 100)
+   if (!selectedContent || !selectedButton) return;
 
-   resumePortfolioTabBtns[resumeTabClick].classList.add("active");
+   selectedContent.style.display = "flex";
+   requestAnimationFrame(() => selectedContent.classList.add("active"));
+   selectedButton.classList.add("active");
 }
 
 resumePortfolioTabBtns.forEach((resumePortfolioTabBtn, i) => {
@@ -195,36 +196,35 @@ portfolioCardswithModals.forEach((portfolioCardswithModal) => {
 //     });
 // });
 
-(function () {
-    emailjs.init({
-        publicKey: "rieG3P6f9QESbyGUo",
-    });
-})();
-
 const contactForm = document.getElementById("sue-contact-form");
 const alertBox = document.querySelector(".contact-form-alert");
 
-contactForm.addEventListener("submit", function (e) {
-    e.preventDefault();
+if (contactForm && alertBox && window.emailjs) {
+    emailjs.init({
+        publicKey: "rieG3P6f9QESbyGUo",
+    });
 
-    alertBox.innerHTML = `<span>Sending...</span>`;
+    contactForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        alertBox.innerHTML = "<span>Sending...</span>";
 
-    emailjs.sendForm("service_2szd9w8", "template_wi7zhdi", "contactForm")
-        .then(() => {
-            alertBox.innerHTML = `
-                <span>Message sent successfully!</span>
-                <i class='ri-checkbox-circle-fill'></i>
-            `;
-            contactForm.reset();
-        })
-        .catch((error) => {
-            alertBox.innerHTML = `
-                <span>Message not sent!</span>
-                <i class='ri-error-warning-fill'></i>
-            `;
-            console.error(error);
-        });
-});
+        emailjs.sendForm("service_2szd9w8", "template_wi7zhdi", this)
+            .then(() => {
+                alertBox.innerHTML = `
+                    <span>Message sent successfully!</span>
+                    <i class='ri-checkbox-circle-fill'></i>
+                `;
+                contactForm.reset();
+            })
+            .catch((error) => {
+                alertBox.innerHTML = `
+                    <span>Message not sent!</span>
+                    <i class='ri-error-warning-fill'></i>
+                `;
+                console.error("EmailJS submission failed:", error);
+            });
+    });
+}
 /* =====================================================
    Shrink the height of the header on scroll
 ===================================================== */
